@@ -1,0 +1,134 @@
+﻿Now, 10 problems for you to practice ROS 2 Pub/Sub (Python)
+
+Basic
+    1. Create a publisher node that publishes integer numbers counting up every 0.5 seconds.
+    2. Create a subscriber node that listens to the integer and prints only even numbers.
+    3. Modify the publisher to publish a custom message containing two floats (e.g., x, y positions).
+    4. Write a node that subscribes to the custom message and calculates the Euclidean distance from the origin.
+    5. Create a publisher that publishes a boolean flag toggling every second, and a subscriber that counts how many times the flag switched.
+
+Intermediate
+    6. Implement a publisher that publishes sensor-like data (e.g., temperature readings with random noise), and a subscriber that filters and logs values above a threshold.
+    7. Write two publishers publishing on different topics and a single subscriber that subscribes to both and logs messages indicating which topic they came from.
+    8. Create a subscriber that republishes received data on a different topic, but with modified content (e.g., scaling numeric values).
+
+Advanced
+    9. Build a node that subscribes to a topic publishing poses (position + orientation), and transforms those poses to a different coordinate frame before republishing.
+    10. Implement a network of nodes where one publishes commands, another subscribes and controls simulated actuators, and a third logs actuator states, all communicating asynchronously.
+
+I can help with any of these problems—just ask! Would you like me to provide starter code for any specific problem?
+🧠 ROS 2 Humble Pub/Sub Challenge Set (Python)
+🔢
+Problem
+Difficulty
+Est. Time
+1
+Basic number publisher (0, 1, 2...)
+🟢 Easy
+10 mins
+2
+Even-number filter subscriber
+🟢 Easy
+10–15 mins
+3
+Custom message: 2D coordinates
+🟡 Medium
+20 mins
+4
+Subscriber that calculates Euclidean distance
+🟡 Medium
+25 mins
+5
+Boolean publisher (on/off toggle) with toggle counter
+🟡 Medium
+20–30 mins
+6
+Random noisy temperature publisher + high-temp filter
+🟠 Challenging
+30–40 mins
+7
+Multi-topic subscriber (e.g., /cmd1 and /cmd2)
+🟠 Challenging
+40 mins
+8
+Re-publisher: transforms and republishes data
+🔴 Hard
+45–60 mins
+9
+Pose subscriber + coordinate transform math
+🔴 Hard
+60–75 mins
+10
+Simulated actuator: command in, state out via pub/sub
+🔴 Expert
+1.5–2 hrs
+
+✅ Problem 1: Number Publisher
+Goal: Create a publisher that sends increasing integers on the topic /numbers.
+    • Topic: /numbers
+    • Msg type: std_msgs/msg/Int32
+    • Frequency: 2 Hz
+    • Starts from 0, increments by 1 every message
+
+✅ Problem 2: Even Number Subscriber
+Goal: Subscribe to /numbers and only print even ones.
+    • Subscribe to: /numbers
+    • Check if msg.data % 2 == 0 before printing
+    • Expected log: "[Even] 4"
+
+✅ Problem 3: Custom 2D Coordinates
+Goal: Use a custom message with two float fields x, y.
+    • Create a custom .msg file in your package:
+Position2D.msg:
+      go
+      CopyEdit
+      float32 x
+      float32 y
+    • Publish random x, y values between 0–100
+    • Topic: /position
+
+✅ Problem 4: Distance Calculator
+Goal: Subscribe to /position and print the Euclidean distance from (0, 0).
+    • Use math:
+      python
+      CopyEdit
+      distance = math.sqrt(x**2 + y**2)
+
+✅ Problem 5: Boolean Toggle & Counter
+Goal: Publish a boolean that flips between True and False every second.
+    • Subscriber counts number of times it changes (toggle detection).
+    • Keep a running total: Toggled 5 times so far
+
+✅ Problem 6: Noisy Sensor Filter
+Goal: Publish random temperature between 15–35°C.
+    • Subscriber only logs values above 30°C.
+    • Use std_msgs/msg/Float32
+
+✅ Problem 7: Multi-topic Merge Subscriber
+Goal: Publish two different commands on:
+    • /left_cmd
+    • /right_cmd
+Subscriber subscribes to both, logs which side the message came from.
+
+✅ Problem 8: Transform and Republish
+Goal: Subscribe to /raw_data, double the number, and republish to /processed_data.
+    • Input: Int32
+    • Output: Int32
+    • Transform: msg.data * 2
+
+✅ Problem 9: Pose Transform (Advanced Math)
+Goal: Subscribe to geometry_msgs/msg/Pose, and translate the position into a new coordinate frame (e.g., +2m in x, -3m in y).
+    • Requires understanding Pose.position.{x, y, z} and possibly tf_transformations
+
+✅ Problem 10: Simulated Actuator Network
+Goal: Build 3 nodes:
+    • command_publisher: sends actuator commands (e.g., speed)
+    • actuator_simulator: receives command, "applies" it (e.g., simulates movement)
+    • state_publisher: publishes simulated state (e.g., position)
+
+🧠 How long will this take?
+If you're learning at a comfortable pace and practicing while understanding:
+    • Problems 1–5: 1 day (~2.5–3 hours total)
+    • Problems 6–8: 1–1.5 more days
+    • Problems 9–10: Advanced—reserve these for a focused 2nd or 3rd day when you're confident
+
