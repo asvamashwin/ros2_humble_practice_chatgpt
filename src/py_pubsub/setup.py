@@ -30,6 +30,11 @@ setup(
             'distance_calculator = py_pubsub.distance_calculator:main',
             'boolean_toggle_publisher = py_pubsub.boolean_toggle_publisher:main',
             'toggle_counter = py_pubsub.boolean_toggle_counter:main',
+            'noisy_sensor_data = py_pubsub.noisy_sensor_publisher:main',
+            'noisy_temp_info = py_pubsub.noisy_sensor_temp_subscriber:main',
+            'lr_subscriber = py_pubsub.left_right_subscriber:main',
+            'right_command_pub = py_pubsub.right_command_pub:main',
+            'left_command_pub = py_pubsub.left_command_pub:main',
         ],
     },
 )
