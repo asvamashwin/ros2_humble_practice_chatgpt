@@ -35,6 +35,7 @@ setup(
             'lr_subscriber = py_pubsub.left_right_subscriber:main',
             'right_command_pub = py_pubsub.right_command_pub:main',
             'left_command_pub = py_pubsub.left_command_pub:main',
+            'transform_node = py_pubsub.raw_data_sub_tf_publisher:main',
         ],
     },
 )
